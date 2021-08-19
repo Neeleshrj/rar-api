@@ -5,16 +5,18 @@ const {AnimeModel} = require('../models/anime-model');
 
 
 router.get('/', async (req,res) => {
+    const queryObj = req.query.Genres;
+    console.log(queryObj);
     await AnimeModel
     .find({
-        Genres: req.query.Genres
+        Genres: { $all: queryObj}
     })
     .then(list => {
-        if(!list) return res.status(400).send('Empty Database!');
+        if(list.length == 0) return res.status(400).send('No Matches found!');
         else{
             var index = list.length
             console.log(index)
-            var x = Math.ceil(Math.random()*100);
+            var x = Math.ceil(Math.random()*(index));
             res.send(list[x])
             console.log(x)
         }
