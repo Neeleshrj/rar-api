@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const search = require('./routes/search');
+const random = require('./routes/random');
+const randomGenres = require('./routes/randomGenre');
 // const apicache = require('apicache');
 
 const app = express();
@@ -14,6 +16,8 @@ mongoose.connect('mongodb+srv://admin:rishi@chutiya1337@animedb.suudi.mongodb.ne
 
 app.use(express.json());
 app.use('/api/search',search);
+app.use('/api/random',random);
+app.use('/api/randomGenres', randomGenres);
 
 // app.get('/', (req,res) => {
 //     res.send('Hello Weirdo');
